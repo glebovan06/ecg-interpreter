@@ -63,9 +63,15 @@ def tachycardia_ecg() -> ECGData:
 
 
 
+BASE_NORMAL_HEART_RATE = 75.0
+
 @pytest.fixture
 def valid_ecg_dataset(make_reading):
-    return [make_reading(heart_rate=hr) for hr in (75.0, 74.0, 76.0)]
+    return [
+        make_reading(heart_rate=BASE_NORMAL_HEART_RATE - 1),
+        make_reading(heart_rate=BASE_NORMAL_HEART_RATE),
+        make_reading(heart_rate=BASE_NORMAL_HEART_RATE + 1),
+    ]
 
 @pytest.fixture
 def single_ecg_dataset(make_reading):

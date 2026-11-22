@@ -1,11 +1,7 @@
 import pytest
 from ecg_interpreter.ecg.interpreter import interpret_ecg
 from ecg_interpreter.models.interpretation import Interpretation, Diagnosis, Urgency
-
-
-
 #проверять граничные значения, в основном позитивные сценарии
-
 @pytest.mark.parametrize("fixture_name, expected", [
     ("normal_data_ecg", Interpretation(Diagnosis.NORMAL, Urgency.NONE)),
     ("infarction_ecg", Interpretation(Diagnosis.INFARCTION, Urgency.URGENT)),
@@ -18,8 +14,6 @@ from ecg_interpreter.models.interpretation import Interpretation, Diagnosis, Urg
 ],
     ids=["normal", "infarction", "ischemia", "infarction_risk", "previous_infarction", "arrythmia", "bradycardia", "tachycardia"]
 ) 
-
-
 def test_interpret_ecg(request: pytest.FixtureRequest, fixture_name, expected) :
         data = request.getfixturevalue(fixture_name)
         result = interpret_ecg(data)
